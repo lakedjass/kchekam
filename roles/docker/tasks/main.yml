@@ -35,9 +35,8 @@
 - name: Add Docker apt key.
   ansible.builtin.get_url:
     url: "https://download.docker.com/linux/ubuntu/gpg"
-    dest: /etc/apt/keyrings/docker.gpg
+    dest: /etc/apt/keyrings/docker.asc
     mode: '0644'
-    checksum: "{{ docker_apt_gpg_key_checksum | default(omit) }}"
 
 - name: Add docker repository
   ansible.builtin.apt_repository:
@@ -56,3 +55,8 @@
       - docker-buildx-plugin 
       - docker-compose-plugin
     state: present
+
+
+- name: Include task to add users to docker groups
+  ansible.builtin.include_tasks:
+    file: docker-users.yml
