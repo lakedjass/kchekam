@@ -1,0 +1,57 @@
+---
+# tasks file for default
+
+- name: Update package system
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Uninstall old version. of docker and conflits packages
+  ansible.builtin.apt:
+    name:
+      - docker.io
+      - docker-doc 
+      - docker-compose 
+      - podman-docker 
+      - containerd
+      - runc
+    state: absent
+
+
+- name: install dependencies
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+
+
+- name: Create /etc/apt/keyrings folder
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    mode: '0755'
+    state: directory
+
+- name: Add Docker apt key.
+  ansible.builtin.get_url:
+    url: "{{ https://download.docker.com/linux/ubuntu/gpg }}"
+    dest: /etc/apt/keyrings/docker.gpg
+    mode: '0644'
+
+- name: Add docker repository
+  ansible.builtin.apt_repository:
+    repo: "{{ docker_apt_repository }}"
+    state: present
+    filename: docker
+
+
+
+- name: Uninstall old version. of docker and conflits packages
+  ansible.builtin.apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin 
+      - docker-compose-plugin
+    state: present
