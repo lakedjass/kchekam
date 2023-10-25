@@ -34,9 +34,10 @@
 
 - name: Add Docker apt key.
   ansible.builtin.get_url:
-    url: "{{ https://download.docker.com/linux/ubuntu/gpg }}"
+    url: "https://download.docker.com/linux/ubuntu/gpg"
     dest: /etc/apt/keyrings/docker.gpg
     mode: '0644'
+    checksum: "{{ docker_apt_gpg_key_checksum | default(omit) }}"
 
 - name: Add docker repository
   ansible.builtin.apt_repository:
