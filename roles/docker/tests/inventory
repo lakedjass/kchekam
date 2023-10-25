@@ -3,7 +3,7 @@
 
 # Application servers
 [all]
-192.168.56.4
+10.0.0.171
 
 # Variables that will be applied to all servers
 [all:vars]
