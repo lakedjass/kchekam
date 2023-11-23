@@ -1,8 +1,14 @@
----
 - name: Verify
   hosts: all
   gather_facts: false
   tasks:
-    - name: Nginx est présent
+    - name: Docker est présent
       ansible.builtin.stat:
         path: /usr/bin/docker
+    - name: chargement de l'état des service
+      ansible.builtin.service_facts:
+    - name: Controle de la présence de docker
+      ansible.builtin.assert:
+        that:
+          - services["docker.service"]["state"] == "running"
+          - services["docker.service"]["status"] == "enabled"
