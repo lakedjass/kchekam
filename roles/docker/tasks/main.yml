@@ -57,6 +57,12 @@
     state: present
 
 
+- name: start and enable docker service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
+
 - name: Include task to add users to docker groups
   ansible.builtin.include_tasks:
     file: docker-users.yml
