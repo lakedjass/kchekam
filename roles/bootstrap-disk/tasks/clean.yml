@@ -1,0 +1,29 @@
+---
+# tasks file for bootstrap disk
+- name: Read device information 
+  community.general.parted: 
+    device: "{{disk_device}}"
+    unit: MiB
+  register: sdb_info
+
+- name: Print all disk partition
+  ansible.builtin.debug:
+    msg: "{{ sdb_info.partitions }}"
+
+- name: Run command if /path/to/database does not exist (without 'args')
+  ansible.builtin.command: "swapoff {{disk_device}}{{ item.num }}"
+  loop: "{{ sdb_info.partitions | community.general.json_query('[?fstype!=`` ]') }}"
+
+- name: Remove all partitions from disk
+  community.general.parted:
+    device: "{{disk_device}}"
+    number: "{{ item.num }}"
+    fs_type: ''
+    state: absent
+  loop: "{{ sdb_info.partitions }}"
+  ignore_errors: true
+  # loop: "{{ sdb_info.partitions | community.general.json_query('[?fstype!=`` ]') }}"
+
+- name: Reboot machine and send a message
+  ansible.builtin.reboot:
+    msg: "Rebooting machine in 5 seconds"

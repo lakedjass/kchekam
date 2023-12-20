@@ -1,0 +1,8 @@
+---
+
+- name: Install openstack kolla ansible
+  hosts: localhost
+  connection: local
+  become: true
+  roles:
+    - role: '../../roles/kolla-ansible'

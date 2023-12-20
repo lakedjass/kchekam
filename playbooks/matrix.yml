@@ -1,0 +1,27 @@
+---
+- name: Install Matrix
+  hosts: localhost
+  # become: true
+  tasks:
+    - name: Clone matrix project
+      ansible.builtin.git:
+        repo: 'https://github.com/lakedjass/matrix-docker-ansible-deploy.git'
+        dest: /tmp/matrix-docker-ansible-deploy
+        version: master
+    # - name: generate matrix hosts file
+    - name: Create host_vars directory
+      ansible.builtin.file:
+        path: '/tmp/matrix-docker-ansible-deploy/inventory/host_vars/matrix.cyberzone-sec.com'
+        state: directory
+        mode: '744'
+    - name: Copy example variales file
+      ansible.builtin.copy:
+        src: 'vars.yml'
+        dest: '/tmp/matrix-docker-ansible-deploy/inventory/host_vars/matrix.cyberzone-sec.com/'
+        mode: '0744'
+    - name: Copy hosts variales file
+      ansible.builtin.copy:
+        src: 'hosts'
+        dest: '/tmp/matrix-docker-ansible-deploy/inventory/'
+        mode: '0644'
+

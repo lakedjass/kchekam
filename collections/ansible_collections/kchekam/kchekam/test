@@ -1,0 +1,3 @@
+JMESPathError in json_query filter plugin:\ninvalid token: Parse error at column 10, token \"]\" (RBRACKET), for expression:\n\"[?fstype==]\"\n   
+
+`

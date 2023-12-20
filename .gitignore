@@ -1,0 +1,7 @@
+*.bak
+ansible/
+
+sudo openssl req \
+  -newkey rsa:4096 -nodes -sha256 -keyout privkey.pem \
+  -addext "subjectAltName = DNS:matrix.cyberzone-sec.com" \
+  -x509 -days 365 -out chain.pem

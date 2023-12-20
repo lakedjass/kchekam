@@ -1,0 +1,62 @@
+---
+# The bare domain name which represents your Matrix identity.
+# Matrix user ids for your server will be of the form (`@user:<matrix-domain>`).
+#
+# Note: this playbook does not touch the server referenced here.
+# Installation happens on another server ("matrix.<matrix-domain>").
+#
+# If you've deployed using the wrong domain, you'll have to run the Uninstalling step,
+# because you can't change the Domain after deployment.
+#
+# Example value: example.com
+matrix_domain: cyberzone-sec.com
+
+# The Matrix homeserver software to install.
+# See:
+#  - `roles/custom/matrix-base/defaults/main.yml` for valid options
+# - the `docs/configuring-playbook-IMPLEMENTATION_NAME.md` documentation page, if one is available for your implementation choice
+matrix_homeserver_implementation: synapse
+
+matrix_playbook_reverse_proxy_type: playbook-managed-nginx
+# A secret used as a base, for generating various other secrets.
+# You can put any string here, but generating a strong one is preferred (e.g. `pwgen -s 64 1`).
+matrix_homeserver_generic_secret_key: '7KO4KVhopUj0zO034jAVr2xgNuiIpQ4PrXQNfXph8fCMStJEEqPXT6U6SsVL9V12'
+
+
+# you won't be required to define this variable (see `docs/configuring-playbook-ssl-certificates.md`).
+#
+# Example value: someone@example.com
+matrix_ssl_lets_encrypt_support_email: ''
+
+# The playbook creates additional Postgres users and databases (one for each enabled service)
+##PostgreSQL password
+devture_postgres_connection_password: 'password'
+
+##SSL certificates retrieval
+# matrix_ssl_retrieval_method: none
+matrix_ssl_retrieval_method: manually-managed
+matrix_ssl_config_dir_path: /etc/letsencrypt
+
+##Retries when pulling images and creating containers
+devture_playbook_help_container_retries_delay: 9
+devture_playbook_help_container_retries_count: 9
+
+##Delay for systemd_service
+devture_systemd_service_manager_up_verification_delay_seconds: 60
+
+##Other configurations, enable them accordingly
+#matrix_nginx_proxy_https_enabled: false
+#matrix_coturn_enabled: false
+#matrix_nginx_proxy_base_domain_serving_enabled: true
+
+matrix_synapse_ext_password_provider_ldap_enabled: true
+matrix_synapse_ext_password_provider_ldap_uri: 
+  - "ldap://10.0.0.58:389"
+matrix_synapse_ext_password_provider_ldap_start_tls: false
+matrix_synapse_ext_password_provider_ldap_base: "cn=users,dc=cyberzone-sec,dc=com"
+matrix_synapse_ext_password_provider_ldap_attributes_uid: "uid"
+matrix_synapse_ext_password_provider_ldap_attributes_mail: "mail"
+matrix_synapse_ext_password_provider_ldap_attributes_name: "cn"
+matrix_synapse_ext_password_provider_ldap_bind_dn: "cn=admin,dc=cyberzone-sec,dc=com"
+matrix_synapse_ext_password_provider_ldap_bind_password: "admin"
+matrix_synapse_ext_password_provider_ldap_filter: ""

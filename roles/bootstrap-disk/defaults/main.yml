@@ -1,0 +1,6 @@
+---
+# defaults file for bootstrap disk
+
+disk_device: '/dev/sdb'
+
+#requirements jmespath

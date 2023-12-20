@@ -1,0 +1,19 @@
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    eno1:
+      critical: true
+      dhcp-identifier: mac
+      dhcp4: true
+      nameservers:
+        addresses:
+        - 51.159.47.26
+        - 51.159.47.28
+        search:
+        - online.net
+  version: 2
+  vlans:
+    eno1.{{ id_vlan }}:
+      accept-ra: no
+      id: {{ id_vlan }}
+      link: eno1

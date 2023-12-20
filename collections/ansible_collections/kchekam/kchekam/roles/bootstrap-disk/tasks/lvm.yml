@@ -1,0 +1,36 @@
+---
+# tasks file for bootstrap disk
+
+- name: Read device information 
+  community.general.parted: 
+    device: "{{disk_device}}"
+    unit: MiB
+  register: sdb_info
+
+- name: Print all disk partition
+  ansible.builtin.debug:
+    msg: "{{ sdb_info.partitions }}"
+
+- name: Install lvm2 dependency
+  ansible.builtin.apt:
+    name: lvm2
+    state: present
+- name: "create cinder volumes"
+  block:
+    - name: Create a new primary partition for LVM
+      community.general.parted:
+        device: "{{disk_device}}"
+        number: "1"
+        flags: [ lvm ]
+        state: present
+        label: gpt
+
+    - name: Create a volume group on top of /dev/sda3 and resize the volume group /dev/sda3 to the maximum possible
+      community.general.lvg:
+        vg: cinder-volumes
+        pvs: "{{disk_device}}1"
+        pvresize: true
+
+  rescue:
+    - name: Errors
+      meta: flush_handlers

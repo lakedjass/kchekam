@@ -1,0 +1,5 @@
+[matrix_servers]
+matrix.cyberzone-sec.com ansible_host=10.0.0.197 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/k8s-key
+
+[matrix_servers:vars]
+ansible_python_interpreter=/usr/bin/python3

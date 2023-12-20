@@ -1,0 +1,7 @@
+---
+
+- name: Install openstack kolla ansible
+  hosts: all
+  become: true
+  roles:
+    - role: '../../roles/bootstrap-disk'
