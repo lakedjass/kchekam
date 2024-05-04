@@ -4,6 +4,7 @@
   ansible.builtin.pip:
     name: jmespath
   delegate_to: localhost
+  become: false
 - name: Read device information 
   community.general.parted: 
     device: "{{disk_device}}"
