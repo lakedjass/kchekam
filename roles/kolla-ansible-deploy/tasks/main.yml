@@ -1,5 +1,23 @@
 ---
 # tasks file for default
-- name: Update package system
-  ansible.builtin.apt:
-    update_cache: true
+
+- name: Copy file
+  ansible.builtin.template:
+    src: mutinode.j2
+    dest: /home/ubuntu/kolla-ansible/multinode
+
+- name: Copy file
+  ansible.builtin.template:
+    src: netplan.yml.j2
+    dest: /etc/netplan/00-installer-config.yaml
+
+- name: Copy folder 
+  ansible.builtin.copy:
+    src: globals.yml
+    dest: /etc/kolla/globals.yml
+
+- name: Run a net plan apply
+  ansible.builtin.shell: |
+        sudo netplan apply
+  args:
+    executable: /bin/bash
