@@ -2,3 +2,4 @@
 # defaults file for kolla ansible
 
 id_vlan: 2351
+ip: "51.159.15.159"
