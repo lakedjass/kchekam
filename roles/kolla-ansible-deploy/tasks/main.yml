@@ -4,7 +4,7 @@
 - name: Update package system
   ansible.builtin.apt:
     update_cache: true
-
+  become: true
 
 - name: Copy file
   ansible.builtin.template:
@@ -15,7 +15,7 @@
   ansible.builtin.template:
     src: netplan.yml.j2
     dest: /etc/netplan/00-installer-config.yaml
-
+  become: true
 - name: Copy folder 
   ansible.builtin.copy:
     src: globals.yml
@@ -26,3 +26,4 @@
         sudo netplan apply
   args:
     executable: /bin/bash
+  become: true
