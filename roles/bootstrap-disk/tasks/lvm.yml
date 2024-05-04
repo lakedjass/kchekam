@@ -32,7 +32,6 @@
         pvresize: true
 
   rescue:
-    - name: Set clean to true
-      notify: clean disk
-    - name: Errors
-      meta: flush_handlers
+    - name: clean disk
+      ansible.builtin.set_fact:
+        clean: false
