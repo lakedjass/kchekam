@@ -1,5 +1,8 @@
 ---
 # tasks file for bootstrap disk
+- name: Install bottle python package
+  ansible.builtin.pip:
+    name: jmespath
 - name: Read device information 
   community.general.parted: 
     device: "{{disk_device}}"
