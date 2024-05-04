@@ -1,6 +1,5 @@
 ---
 # handlers file for bootstrap disk
-
-- name: Setting host facts using complex arguments
+- name: clean disk
   ansible.builtin.set_fact:
     clean: false

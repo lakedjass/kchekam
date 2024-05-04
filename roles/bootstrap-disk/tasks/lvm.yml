@@ -30,6 +30,7 @@
         vg: cinder-volumes
         pvs: "{{disk_device}}1"
         pvresize: true
+      notify: clean disk
 
   rescue:
     - name: Errors
