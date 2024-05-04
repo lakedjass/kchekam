@@ -3,6 +3,7 @@
 - name: Install bottle python package
   ansible.builtin.pip:
     name: jmespath
+  delegate_to: localhost
 - name: Read device information 
   community.general.parted: 
     device: "{{disk_device}}"
