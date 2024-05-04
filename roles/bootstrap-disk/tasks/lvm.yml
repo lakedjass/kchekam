@@ -30,8 +30,9 @@
         vg: cinder-volumes
         pvs: "{{disk_device}}1"
         pvresize: true
-      notify: clean disk
 
   rescue:
+    - name: Set clean to true
+      notify: clean disk
     - name: Errors
       meta: flush_handlers
