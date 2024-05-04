@@ -3,6 +3,7 @@
 - name: Update package system
   ansible.builtin.apt:
     update_cache: true
+  become: true
 
 - name: Install Python3 And Pip3
   ansible.builtin.apt:
@@ -16,6 +17,7 @@
     - gcc
     - libssl-dev
     - python3-venv
+  become: true
 
 - name: Install bottle python package
   ansible.builtin.pip:
@@ -88,3 +90,4 @@
         cat <(sudo crontab -l) <(echo "@reboot mount -t configfs /etc/rc.local /sys/kernel/config") | sudo crontab -
   args:
     executable: /bin/bash
+  become: true
