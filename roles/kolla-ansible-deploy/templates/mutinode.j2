@@ -3,7 +3,7 @@
 
 [control]
 # These hostname must be resolvable from your deployment host
-51.158.61.25   ansible_user=ubuntu  ansible_become=True
+51.159.15.159   ansible_user=ubuntu  ansible_become=True
 
 
 # The above can also be specified as follows:
@@ -12,13 +12,13 @@
 # The network nodes are where your l3-agent and loadbalancers will run
 # This can be the same as a host in the control group
 [network]
-51.158.61.25   ansible_user=ubuntu  ansible_become=True
+51.159.15.159   ansible_user=ubuntu  ansible_become=True
 
 [compute]
-51.158.61.25   ansible_user=ubuntu  ansible_become=True
+51.159.15.159   ansible_user=ubuntu  ansible_become=True
 
 [monitoring]
-51.158.61.25   ansible_user=ubuntu  ansible_become=True
+51.159.15.159   ansible_user=ubuntu  ansible_become=True
 
 # When compute nodes and control nodes use different interfaces,
 # you need to comment out "api_interface" and other interfaces from the globals.yml
@@ -26,10 +26,10 @@
 #compute01 neutron_external_interface=eth0 api_interface=em1 tunnel_interface=em1
 
 [storage]
-51.158.61.25   ansible_user=ubuntu  ansible_become=True
+51.159.15.159   ansible_user=ubuntu  ansible_become=True
 
 [deployment]
-51.158.61.25   ansible_user=ubuntu  ansible_become=True
+51.159.15.159   ansible_user=ubuntu  ansible_become=True
 
 [baremetal:children]
 control
