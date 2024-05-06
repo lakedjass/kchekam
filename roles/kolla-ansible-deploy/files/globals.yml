@@ -65,8 +65,8 @@ kolla_base_distro: "ubuntu"
 # in "OpenStack options" section, and set this value to the IP of your
 # 'network_interface' as set in the Networking section below.
 #kolla_internal_vip_address: "10.10.10.254"
-kolla_internal_vip_address: "51.159.15.159"
-kolla_internal_address: "51.159.15.159"
+kolla_internal_vip_address: "51.159.211.69"
+kolla_internal_address: "51.159.211.69"
 
 # This is the DNS name that maps to the kolla_internal_vip_address VIP. By
 # default it is the same as kolla_internal_vip_address.
@@ -165,7 +165,7 @@ network_interface: "eno1"
 # though an IP address can exist on this interface, it will be unusable in most
 # configurations. It is recommended this interface not be configured with any IP
 # addresses for that reason.
-neutron_external_interface: "eno1.2351"
+neutron_external_interface: "eno1.2286"
 
 # Valid options are [ openvswitch, ovn, linuxbridge, vmware_nsxv, vmware_nsxv3, vmware_nsxp, vmware_dvs ]
 # if vmware_nsxv3 or vmware_nsxp is selected, enable_openvswitch MUST be set to "no" (default is yes)
