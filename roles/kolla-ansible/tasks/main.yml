@@ -22,17 +22,14 @@
 - name: Install bottle python package
   ansible.builtin.pip:
     name: virtualenv
-- name: Create a directory if it does not exist
-  ansible.builtin.file:
-    path: /kolla/venv
-    state: directory
-  become: true
+
 
 - name: Install bottle python package
   ansible.builtin.pip:
     name: pip
     state: latest
     virtualenv: /kolla/venv
+  become: true
 
 
 - name: Install bottle python package
