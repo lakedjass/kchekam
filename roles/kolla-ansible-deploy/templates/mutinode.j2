@@ -1,9 +1,13 @@
 # These initial groups are the only groups required to be modified. The
 # additional groups are for more control of the environment.
+[all:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/.ssh/key
+ansible_become=True
 
 [control]
 # These hostname must be resolvable from your deployment host
-51.159.15.159   ansible_user=ubuntu  ansible_become=True
+51.159.211.69
 
 
 # The above can also be specified as follows:
@@ -12,13 +16,15 @@
 # The network nodes are where your l3-agent and loadbalancers will run
 # This can be the same as a host in the control group
 [network]
-51.159.15.159   ansible_user=ubuntu  ansible_become=True
+51.159.211.69
 
 [compute]
-51.159.15.159   ansible_user=ubuntu  ansible_become=True
+51.159.211.69
+51.159.15.159
+51.159.14.47
 
 [monitoring]
-51.159.15.159   ansible_user=ubuntu  ansible_become=True
+51.159.211.69
 
 # When compute nodes and control nodes use different interfaces,
 # you need to comment out "api_interface" and other interfaces from the globals.yml
@@ -26,10 +32,12 @@
 #compute01 neutron_external_interface=eth0 api_interface=em1 tunnel_interface=em1
 
 [storage]
-51.159.15.159   ansible_user=ubuntu  ansible_become=True
+51.159.211.69
+51.159.15.159
+51.159.14.47
 
 [deployment]
-51.159.15.159   ansible_user=ubuntu  ansible_become=True
+51.159.211.69
 
 [baremetal:children]
 control
