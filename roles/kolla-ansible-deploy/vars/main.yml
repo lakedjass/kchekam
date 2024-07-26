@@ -2,6 +2,6 @@ id_vlan: 50
 ip: "51.159.211.69"
 inventory:
   master:
-    - {{ ip }}
+    - "{{ ip }}"
   slaves:
-    - {{ ip }}
+    - "{{ ip }}"
