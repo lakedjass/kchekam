@@ -1,7 +1,7 @@
-id_vlan: 2286
+id_vlan: 50
 ip: "51.159.211.69"
 inventory:
   master:
-    - 51.159.211.69
+    - {{ ip }}
   slaves:
-    - 51.159.211.69
+    - {{ ip }}
