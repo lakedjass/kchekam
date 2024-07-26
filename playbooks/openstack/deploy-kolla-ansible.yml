@@ -3,7 +3,9 @@
 - name: Install openstack kolla ansible
   hosts: all
   become: true
-  roles:
-    - role: '../../roles/kolla-ansible-deploy'
+  pre_tasks:
+    - set_fact:
       ip: "{{ ip_value }}"
       id_vlan: "{{ id_vlan }}"
+  roles:
+    - role: '../../roles/kolla-ansible-deploy'
