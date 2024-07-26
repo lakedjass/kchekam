@@ -7,24 +7,27 @@ ansible_become=True
 
 [control]
 # These hostname must be resolvable from your deployment host
-51.159.211.69
+{% for node in inventory['master'] %}
+ {{ node }}
+{% endfor %}
 
-
-# The above can also be specified as follows:
-#control[01:03]     ansible_user=kolla
 
 # The network nodes are where your l3-agent and loadbalancers will run
 # This can be the same as a host in the control group
 [network]
-51.159.211.69
+{% for node in inventory['master'] %}
+ {{ node }}
+{% endfor %}
 
 [compute]
-51.159.211.69
-51.159.15.159
-51.159.14.47
+{% for node in inventory['slaves'] %}
+ {{ node }}
+{% endfor %}
 
 [monitoring]
-51.159.211.69
+{% for node in inventory['master'] %}
+ {{ node }}
+{% endfor %}
 
 # When compute nodes and control nodes use different interfaces,
 # you need to comment out "api_interface" and other interfaces from the globals.yml
@@ -32,12 +35,14 @@ ansible_become=True
 #compute01 neutron_external_interface=eth0 api_interface=em1 tunnel_interface=em1
 
 [storage]
-51.159.211.69
-51.159.15.159
-51.159.14.47
+{% for node in inventory['slaves'] %}
+ {{ node }}
+{% endfor %}
 
 [deployment]
-51.159.211.69
+{% for node in inventory['master'] %}
+ {{ node }}
+{% endfor %}
 
 [baremetal:children]
 control
